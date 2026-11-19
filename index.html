@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Withholding Tax Assistant - เครื่องมือต้นแบบช่วยวิเคราะห์ภาษีเงินได้หัก ณ ที่จ่ายตามกรณีทั่วไปของประเทศไทย">
+  <meta name="theme-color" content="#10233f">
+  <title>AI Withholding Tax Assistant | AI for Taxation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">WHT</div>
+    <div>
+      <div class="eyebrow">AI FOR TAXATION · AC317</div>
+      <h1>AI Withholding Tax Assistant</h1>
+      <p class="subhead">ผู้ช่วยวิเคราะห์ภาษีเงินได้หัก ณ ที่จ่าย · Thailand</p>
+    </div>
+    <span class="mode-pill">PROTOTYPE · RULE-BASED</span>
+  </header>
+
+  <main class="shell">
+    <section class="notice">
+      <strong>ขอบเขตการใช้งาน</strong>
+      เครื่องมือนี้เป็นต้นแบบเพื่อการศึกษา สำหรับธุรกรรมทั่วไปในประเทศตามกติกาที่ระบุเท่านั้น ไม่ใช่คำวินิจฉัยภาษีหรือคำแนะนำทางกฎหมายที่ผูกพัน ต้องตรวจเอกสารและกฎหมายฉบับล่าสุดก่อนนำไปใช้จริง
+    </section>
+
+    <nav class="tabs" aria-label="เมนูหลัก">
+      <button class="tab active" data-tab="calculator">คำนวณภาษี</button>
+      <button class="tab" data-tab="tests">กรณีทดสอบ 10 ข้อ</button>
+      <button class="tab" data-tab="knowledge">ฐานความรู้กฎหมาย</button>
+      <button class="tab" data-tab="about">เกี่ยวกับโครงงาน</button>
+    </nav>
+
+    <section id="calculator" class="panel active">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">TRANSACTION ANALYSIS</div>
+          <h2>วิเคราะห์รายการจ่ายเงิน</h2>
+          <p>กรอกข้อมูลธุรกรรม ระบบจะคัดกรองข้อมูลที่จำเป็นก่อนคำนวณ</p>
+        </div>
+        <button id="resetBtn" class="button secondary">ล้างข้อมูล</button>
+      </div>
+
+      <form id="whtForm" class="form-grid">
+        <label>วันที่จ่ายเงิน
+          <input id="paymentDate" type="date" value="2026-11-09" required>
+        </label>
+        <label>สถานะผู้จ่าย
+          <select id="payerType"><option value="company" selected>บริษัท/นิติบุคคลไทย</option><option value="individual">บุคคลธรรมดา</option><option value="other">หน่วยงาน/กรณีอื่น</option></select>
+        </label>
+        <label>สถานะผู้รับเงิน
+          <select id="recipientType"><option value="company" selected>บริษัท/นิติบุคคลไทย</option><option value="individual">บุคคลธรรมดาไทย</option><option value="foundation">มูลนิธิ/สมาคม</option><option value="foreign">ผู้รับต่างประเทศ</option></select>
+        </label>
+        <label>ประเภทการจ่ายเงิน
+          <select id="category">
+            <option value="rent">ค่าเช่าทรัพย์สิน</option>
+            <option value="service" selected>ค่าบริการทั่วไป (เช่น ทำความสะอาด)</option>
+            <option value="hirework">ค่าจ้างทำของ</option>
+            <option value="advertising">ค่าโฆษณา</option>
+            <option value="transport">ค่าขนส่งโดยผู้ประกอบการขนส่ง</option>
+            <option value="goodsdelivery">ซื้อสินค้าพร้อมผู้ขายจัดส่ง</option>
+            <option value="hotel">ค่าห้องพัก/บริการโรงแรม</option>
+            <option value="restaurant">ค่าอาหาร/บริการภัตตาคาร</option>
+            <option value="unclear">ไม่ทราบประเภท/ระบุเพียง “ค่าดำเนินการ”</option>
+          </select>
+        </label>
+        <label class="span-2">รายละเอียดงาน/สัญญา/เอกสาร
+          <textarea id="description" rows="3" placeholder="อธิบายสิ่งที่จ่ายจริง สิ่งที่ผู้รับต้องทำ และเอกสารประกอบ"></textarea>
+        </label>
+        <label>จำนวนเงินก่อน VAT (บาท)
+          <input id="amount" type="number" min="0" step="0.01" value="20000" required>
+        </label>
+        <label>VAT (บาท)
+          <input id="vat" type="number" min="0" step="0.01" value="1400">
+        </label>
+        <label>มูลค่าตามสัญญารวม (บาท)
+          <input id="contractAmount" type="number" min="0" step="0.01" placeholder="ถ้าไม่ทราบให้เว้นว่าง">
+        </label>
+        <label>ผู้ขายสินค้าประกอบธุรกิจขนส่งเป็นปกติหรือไม่
+          <select id="sellerTransport"><option value="unknown" selected>ไม่ทราบ/ยังไม่ได้ตรวจสอบ</option><option value="no">ไม่ใช่ เป็นผู้ขายสินค้าโดยทั่วไป</option><option value="yes">ใช่ เป็นผู้ประกอบการขนส่ง</option></select>
+        </label>
+        <label class="check-row span-2"><input id="separateScope" type="checkbox"> มีสัญญา/ใบแจ้งหนี้แยกค่าขนส่งเป็นบริการอิสระจากการขายสินค้า</label>
+        <div class="span-2 actions">
+          <button type="submit" class="button primary">วิเคราะห์และคำนวณ</button>
+          <button type="button" id="fillSampleBtn" class="button secondary">โหลดตัวอย่างกรณีข้อ 3</button>
+        </div>
+      </form>
+      <div id="result" class="result empty" aria-live="polite">
+        <div class="empty-icon">฿</div>
+        <h3>รอข้อมูลเพื่อวิเคราะห์</h3>
+        <p>กรอกแบบฟอร์มแล้วกด “วิเคราะห์และคำนวณ” เพื่อดูผลลัพธ์ อัตรา ภาษีหัก และเหตุผลทางกฎหมาย</p>
+      </div>
+    </section>
+
+    <section id="tests" class="panel">
+      <div class="section-heading">
+        <div><div class="eyebrow">TEST SUITE</div><h2>กรณีทดสอบตามใบงาน 10 กรณี</h2><p>กดเลือกกรณีเพื่อเติมข้อมูลในเครื่องคำนวณและดูผลลัพธ์ที่คาดหมาย</p></div>
+      </div>
+      <div id="testList" class="test-grid"></div>
+      <div class="footnote">ผลทดสอบในหน้านี้เป็นผลจากกฎที่เข้ารหัสไว้ในต้นแบบ ไม่ใช่หลักฐานการทดสอบกับระบบ LLM ภายนอก</div>
+    </section>
+
+    <section id="knowledge" class="panel">
+      <div class="section-heading"><div><div class="eyebrow">TAX KNOWLEDGE BASE</div><h2>ฐานความรู้กฎหมาย</h2><p>สรุปเฉพาะกรณีทั่วไป พร้อมลิงก์กรมสรรพากรให้เปิดตรวจสอบ</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>ประเภทเงินได้</th><th>อัตราปกติ</th><th>แบบ</th><th>หลักเกณฑ์ / หมายเหตุ</th><th>แหล่งอ้างอิง</th></tr></thead><tbody id="knowledgeRows"></tbody></table></div>
+      <div class="footnote">วันที่ตรวจสอบแหล่งข้อมูล: 19 พฤศจิกายน 2569 · ไม่ใช้อัตราพิเศษ e-Withholding Tax ชั่วคราวที่สิ้นสุดระยะเวลาตามประกาศเดิม 31 ธันวาคม 2568</div>
+    </section>
+
+    <section id="about" class="panel">
+      <div class="section-heading"><div><div class="eyebrow">PROJECT INFORMATION</div><h2>เกี่ยวกับโครงงาน</h2><p>Assignment: AI Withholding Tax Assistant · AC317 การบัญชีภาษีอากร</p></div></div>
+      <div class="about-card">
+        <h3>สมาชิกกลุ่ม</h3>
+        <ol>
+          <li>อรรฆพร ปลื้มประภากร</li>
+          <li>จุฑามาศ แสงทวีป</li>
+          <li>นันทรัตน์ ชัยดี</li>
+          <li>ฐานิดา แสนสิงห์</li>
+        </ol>
+        <p><strong>วันที่กรณีทดสอบตามใบงาน:</strong> 9 พฤศจิกายน 2569</p>
+        <p><strong>กำหนดส่ง:</strong> 30 พฤศจิกายน 2569</p>
+        <p><strong>วิธีทำงาน:</strong> ตรวจข้อมูล → จำแนกลักษณะธุรกรรม → ตรวจเงื่อนไขผู้จ่าย/ผู้รับ → คำนวณภาษี → อธิบายข้อกฎหมาย → ส่งต่อผู้เชี่ยวชาญเมื่อข้อมูลไม่ครบ</p>
+      </div>
+      <div class="about-card warning-card"><h3>ข้อจำกัดสำคัญ</h3><p>รุ่นนี้เป็น rule-based prototype แบบ static ทำงานบนเบราว์เซอร์โดยไม่ส่งข้อมูลออกไปภายนอก ไม่มีการเรียก LLM จริง ไม่มีระบบล็อกอิน/จัดเก็บธุรกรรม และไม่รองรับธุรกรรมข้ามประเทศ อนุสัญญาภาษีซ้อน ภาษีเฉพาะทาง หรือกรณีสัญญาผสมซับซ้อน</p></div>
+    </section>
+
+    <footer>
+      <div>AI Withholding Tax Assistant · Student Prototype</div>
+      <div>แหล่งกฎหมายหลัก: <a href="https://www.rd.go.th/3479.html" target="_blank" rel="noopener">กรมสรรพากร - ท.ป.4/2528</a></div>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+ {"id":1,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"ค่าเช่าสำนักงาน","base":30000,"vat":0,"expected_rate":0.05,"expected_wht":1500,"form":"ภ.ง.ด.53"},
+ {"id":2,"payment_date":"2026-11-09","recipient":"บุคคลธรรมดาไทย","category":"ค่าเช่าอาคาร","base":12000,"vat":0,"expected_rate":0.05,"expected_wht":600,"form":"ภ.ง.ด.3"},
+ {"id":3,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"บริการทำความสะอาด","base":20000,"vat":1400,"expected_rate":0.03,"expected_wht":600,"expected_net":20800,"form":"ภ.ง.ด.53"},
+ {"id":4,"payment_date":"2026-11-09","recipient":"บุคคลธรรมดาไทย","category":"ค่าจ้างทำของ","base":15000,"vat":0,"expected_rate":0.03,"expected_wht":450,"form":"ภ.ง.ด.3"},
+ {"id":5,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"ค่าโฆษณา","base":25000,"vat":1750,"expected_rate":0.02,"expected_wht":500,"expected_net":26250,"form":"ภ.ง.ด.53"},
+ {"id":6,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"ค่าขนส่งเอกชน","base":18000,"vat":0,"expected_rate":0.01,"expected_wht":180,"form":"ภ.ง.ด.53"},
+ {"id":7,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"ซื้อสินค้าพร้อมผู้ขายจัดส่ง","base":42000,"vat":"ไม่ระบุ","expected_rate":0,"expected_wht":0,"form":"ไม่มี","ask":"ยืนยัน VAT และใบกำกับภาษี; ผู้ขายไม่ได้ประกอบกิจการขนส่งเป็นปกติ"},
+ {"id":8,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"บริการโรงแรม","base":8000,"vat":"รวมในใบเรียกเก็บ/ไม่แยกแจ้ง","expected_rate":0,"expected_wht":0,"form":"ไม่มี"},
+ {"id":9,"payment_date":"2026-11-09","recipient":"บริษัทไทย","category":"บริการภัตตาคาร","base":3500,"vat":"รวมในใบเรียกเก็บ/ไม่แยกแจ้ง","expected_rate":0,"expected_wht":0,"form":"ไม่มี"},
+ {"id":10,"payment_date":"2026-11-09","recipient":"ยังไม่ทราบ","category":"ค่าดำเนินการ","base":10000,"expected_rate":null,"expected_wht":null,"form":"หยุดถามข้อมูลเพิ่ม"}
+]
